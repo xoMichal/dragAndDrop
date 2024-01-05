@@ -4,8 +4,8 @@ import DraggableBlockList from './components/DraggableBlockList';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1>Przeciągnij i Upuść Bloki</h1>
+    <div className='container'>
+      <h1>Zmień kolejność!</h1>
       <DraggableBlockList />
     </div>
   );
