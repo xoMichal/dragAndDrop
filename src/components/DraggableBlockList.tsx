@@ -10,8 +10,10 @@ interface Block {
   color: string;
 }
 // TODO
-// extractr function 
+// extractr function
 // extract consts
+// add git pages
+// refactor and clean up
 
 const DraggableBlockList: React.FC = () => {
   const generateRandomColor = () => {
@@ -24,7 +26,6 @@ const DraggableBlockList: React.FC = () => {
     { id: 2, text: 'Block 2', color: 'black' },
   ];
   const [blocks, setBlocks] = useState<Block[]>(defaultBlocks);
-
 
   const moveBlock = (dragIndex: number, hoverIndex: number) => {
     const draggedBlock = blocks[dragIndex];
@@ -64,7 +65,11 @@ const DraggableBlockList: React.FC = () => {
     <DndProvider backend={HTML5Backend}>
       <div className='row'>
         <button onClick={addBlock}>Dodaj blok</button>
-        <button style={{ backgroundColor: `${randomColor ? 'black' : '#3498db'}` }} onClick={toggleRandomColor}>Chce losowości</button>
+        <button
+          style={{ backgroundColor: `${!randomColor ? 'gold' : '#3498db'}` }}
+          onClick={toggleRandomColor}>
+          Chce losowości
+        </button>
         <button onClick={resetBlocks}>Reset</button>
       </div>
       <div>
@@ -76,6 +81,8 @@ const DraggableBlockList: React.FC = () => {
             color={block.color}
             index={index}
             moveBlock={moveBlock}
+            isFirst={index === 0}
+            isLast={index === blocks.length - 1}
           />
         ))}
       </div>
