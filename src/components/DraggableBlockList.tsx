@@ -11,9 +11,6 @@ interface Block {
   text: string;
   color: string;
 }
-// TODO
-// add git pages
-// refactor and clean up
 
 const DraggableBlockList: React.FC = () => {
   
