@@ -3,6 +3,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DraggableBlock from './DraggableBlock';
 import '../styles.css';
+import { generateRandomColor } from '../function';
+import { COLORS, defaultBlocks } from '../constants';
 
 interface Block {
   id: number;
@@ -10,21 +12,12 @@ interface Block {
   color: string;
 }
 // TODO
-// extractr function
-// extract consts
 // add git pages
 // refactor and clean up
 
 const DraggableBlockList: React.FC = () => {
-  const generateRandomColor = () => {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
-  };
+  
   const [randomColor, setRandomColor] = useState(true);
-
-  const defaultBlocks = [
-    { id: 1, text: 'Block 1', color: 'black' },
-    { id: 2, text: 'Block 2', color: 'black' },
-  ];
   const [blocks, setBlocks] = useState<Block[]>(defaultBlocks);
 
   const moveBlock = (dragIndex: number, hoverIndex: number) => {
@@ -46,7 +39,7 @@ const DraggableBlockList: React.FC = () => {
     const newBlock = {
       id: newBlockId,
       text: `Block ${newBlockId}`,
-      color: randomColor ? 'black' : generateRandomColor(),
+      color: randomColor ? COLORS.black : generateRandomColor(),
     };
 
     setBlocks([...blocks, newBlock]);
@@ -66,9 +59,9 @@ const DraggableBlockList: React.FC = () => {
       <div className='row'>
         <button onClick={addBlock}>Dodaj blok</button>
         <button
-          style={{ backgroundColor: `${!randomColor ? 'gold' : '#3498db'}` }}
+          style={{ backgroundColor: `${!randomColor ? COLORS.gold : COLORS.buttonColor}` }}
           onClick={toggleRandomColor}>
-          Chce losowości
+          Chce kolorów
         </button>
         <button onClick={resetBlocks}>Reset</button>
       </div>

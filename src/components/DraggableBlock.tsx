@@ -3,8 +3,8 @@ import {
   useDrag,
   useDrop,
   DragSourceMonitor,
-  DropTargetMonitor,
 } from 'react-dnd';
+import { BLOCK } from '../function';
 
 interface DraggableBlockProps {
   id: number;
@@ -15,7 +15,6 @@ interface DraggableBlockProps {
   isFirst: boolean;
   isLast: boolean;
 }
-// TODO kick styles to css
 const DraggableBlock: React.FC<DraggableBlockProps> = ({
   id,
   text,
@@ -25,6 +24,8 @@ const DraggableBlock: React.FC<DraggableBlockProps> = ({
   isLast,
   moveBlock,
 }) => {
+  const [isMoving, setIsMoving] = useState(false);
+
   const [{ isDragging }, drag, dragRef] = useDrag({
     type: 'block',
     item: { id, index },
@@ -52,14 +53,13 @@ const DraggableBlock: React.FC<DraggableBlockProps> = ({
       item.index = hoverIndex;
     },
   });
-  const [isMoving, setIsMoving] = useState(false);
   
   const moveUp = () => {
     setIsMoving(true);
     moveBlock(index, index - 1);
     setTimeout(() => {
       setIsMoving(false);
-    }, 300); 
+    }, 200); 
   };
 
   const moveDown = () => {
@@ -67,38 +67,21 @@ const DraggableBlock: React.FC<DraggableBlockProps> = ({
     moveBlock(index, index + 1);
     setTimeout(() => {
       setIsMoving(false);
-    }, 300);
+    }, 200);
   };
 
   const opacity = isDragging ? 0.5 : 1;
-  
+  const blockStyles = BLOCK(opacity,isMoving,color)
+
   return (
     <div
       ref={(node) => drag(drop(node))}
-      style={{
-        opacity,
-        backgroundColor: color,
-        width: '300px',
-        padding: 10,
-        marginTop: 5,
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        margin: '4px',
-        textAlign: 'center',
-        color: '#f1c40f',   
-        transition: 'transform 0.3s ease', 
-        transform: isMoving ? 'translateY(10px)' : 'none', 
-      }}>
-      <div style={{ display: 'flex',
-            flexDirection: 'row',}}>
-        <div style={{ display: 'flex',
-            flexGrow: 1, alignItems:'center', justifyContent:'center'}}>{text}</div>
+      style={blockStyles}>
+      <div style={{ display: 'flex',flexDirection: 'row',}}>
+        <div style={{ display: 'flex', flexGrow: 1, alignItems:'center', justifyContent:'center'}}>{text}</div>
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap:8,
-            flexShrink:1
+            display: 'flex',flexDirection: 'column',gap:8,flexShrink:1
           }}>
           {!isFirst && (
             <button className='move-button' onClick={moveUp}>
@@ -117,3 +100,6 @@ const DraggableBlock: React.FC<DraggableBlockProps> = ({
 };
 
 export default DraggableBlock;
+
+
+
