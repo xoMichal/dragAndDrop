@@ -1,11 +1,20 @@
-# Getting Started with Create React App
+# Opis projektu
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Prosta aplikacja wykorzystująca bibliotekę dnd, która pozwala na przenoszenie elementów listy.
+
+Aplikacja posiada możliwość dodawania kolejnych elementów( ograniczone do 6 - akurat tak sobie wymyśliłem), oraz wyboru koloru - to znaczy domyślny bądź losowy.
+Dodatkowo na każdym elemencie znajdują się przyciski które również pozwalają na zmiane miejsca w liście danego elementu.
+
+Dodano przycisk resetu w celu przywrócenia wartości domyślnych.
+
+Aplikację napisano w Typescript w połączeniu z React. Dodano przykładowy test funkcji w Jest
 
 ## Available Scripts
 
 In the project directory, you can run:
+### `npm jesttest`
 
+Runs a jest tests in the background, the results you can find in the terminal with the whole resume.
 ### `npm start`
 
 Runs the app in the development mode.\
